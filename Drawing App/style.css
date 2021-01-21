@@ -44,3 +44,8 @@ canvas {
     margin-left: auto;
     width: auto;
 }
+
+#message {
+    display: none;
+    width: auto;
+}

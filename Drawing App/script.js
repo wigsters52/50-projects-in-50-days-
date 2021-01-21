@@ -1,7 +1,14 @@
-const canvas = document.getElementById('canvas')
-const ctx = canvas.getContext('2d')
+const canvas = document.getElementById('canvas');
+const increaseBtn = document.getElementById('increase');
+const decreaseBtn = document.getElementById('decrease');
+const sizeEL = document.getElementById('size');
+const colorEl = document.getElementById('color');
+const clearEl = document.getElementById('clear');
+const message = document.getElementById('message')
 
-let size = 20
+const ctx = canvas.getContext('2d');
+
+let size = 10
 let isPressed = false
 let color = 'black'
 let x
@@ -32,8 +39,6 @@ canvas.addEventListener('mousemove', (e) => {
         x = x2
         y = y2
     }
-
-
 })
 
 function drawCircle(x, y) {
@@ -52,5 +57,32 @@ function drawLine(x1, y1, x2, y2) {
     ctx.stroke()
 }
 
-// drawCircle(110, 200)
-// drawLine(300, 300, 200, 600)
+function updateSizeOnScreen() {
+    sizeEL.innerText = size
+}
+
+increaseBtn.addEventListener('click', () => {
+    size += 5
+
+    if (size > 50) {
+        size = 50
+        message.style.display = 'block'
+    }
+
+    updateSizeOnScreen()
+})
+
+decreaseBtn.addEventListener('click', () => {
+    size -= 5
+    message.style.display = 'none'
+    if (size < 5) {
+        size = 5
+
+    }
+
+    updateSizeOnScreen()
+})
+
+colorEl.addEventListener('change', (e) => color = e.target.value)
+
+clearEl.addEventListener('click', () => ctx.clearRect(0, 0, canvas.width, canvas.height))
